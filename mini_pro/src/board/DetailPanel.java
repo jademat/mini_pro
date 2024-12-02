@@ -110,6 +110,7 @@ public class DetailPanel extends JPanel {
             String title = board_name.getText();
             String content = board_write.getText();
             crud.updateBoard(boardNo, title, content);                     
+            jdbc.close(jdbc.con, jdbc.pstmt);
             
             detailPanel.revalidate();
             detailPanel.repaint();
@@ -126,6 +127,7 @@ public class DetailPanel extends JPanel {
             if (result == JOptionPane.YES_OPTION) {
                 int boa_no = Integer.parseInt(board_no.getText());
                 crud.deleteBoard(boa_no);
+                jdbc.close(jdbc.con, jdbc.pstmt);
 
             detailPanel.setVisible(false); // DetailPanel 숨김
             boardPanel.setVisible(true);  // Board2 표시
@@ -145,6 +147,7 @@ public class DetailPanel extends JPanel {
         	int boardNo = Integer.parseInt(board_no.getText());
         	int likeCount = crud.updateLikes(boardNo);
         	board_likes.setText(String.valueOf(likeCount));
+        	jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
         	// 좋아요 버튼을 한 번만 클릭되게 하는 로직
         	if (btnlikes == btnlikes) {
         		btnlikes.setEnabled(false);

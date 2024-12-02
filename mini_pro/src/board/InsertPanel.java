@@ -97,7 +97,7 @@ public class InsertPanel extends JPanel {
             
 			board_name.setText("");
 			board_write.setText("");
-            jdbc.close(null, null, null);
+            jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
             
 			insertPanel.setVisible(false); // InsertPanel 숨김
             boardPanel.setVisible(true);  // Board2 표시

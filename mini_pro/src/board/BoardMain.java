@@ -8,24 +8,17 @@ import dto.Member;
 import header.Header;
 import jdbc.JDBC;
 
-public class BoardMain {
+public class BoardMain extends JFrame {
 	static String mem_id;
+	JDBC jdbc = new JDBC();
+	CRUD crud = new CRUD(jdbc);
 	
-	public BoardMain(JDBC jdbc, String mem_id) {
-		this.mem_id = mem_id;
-	
-	}
-	
-    public static void main(String[] args) {
-    	JDBC jdbc = new JDBC();
-    	CRUD crud = new CRUD(jdbc);
-    	
-        JFrame frame = new JFrame();
-        frame.setTitle("운동관리시스템");
-        frame.setSize(1200, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.getContentPane().setLayout(null); // 레이아웃 매니저 비활성화 ==> borderlayout 사용으로 비활성화
-
+	public BoardMain() {
+		        
+        setTitle("운동관리시스템");
+        setSize(1200, 800);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         // Header 패널
         Header headerPanel = new Header(jdbc, mem_id);
         headerPanel.setBounds(0, 0, 1200, 100); // 상단 고정 위치   
@@ -45,10 +38,10 @@ public class BoardMain {
         insertPanel.setLayout(new BorderLayout(0, 0));
         
         // 패널 추가
-        frame.getContentPane().add(headerPanel, BorderLayout.NORTH);
-        frame.getContentPane().add(boardPanel, BorderLayout.CENTER);
-        frame.getContentPane().add(detailPanel, BorderLayout.CENTER);
-        frame.getContentPane().add(insertPanel, BorderLayout.CENTER);
+        getContentPane().add(headerPanel, BorderLayout.NORTH);
+        getContentPane().add(boardPanel, BorderLayout.CENTER);
+        getContentPane().add(detailPanel, BorderLayout.CENTER);
+        getContentPane().add(insertPanel, BorderLayout.CENTER);
         
         // 기본 화면 설정
         boardPanel.setVisible(true);
@@ -60,6 +53,16 @@ public class BoardMain {
         detailPanel.setDetailPanel(boardPanel, detailPanel);        
         insertPanel.setInsertPanel(boardPanel, insertPanel);       
 
-        frame.setVisible(true);
+        setVisible(true);
+	}
+	
+	public BoardMain(JDBC jdbc, String mem_id) {
+		this.mem_id = mem_id;
+	
+	}
+	
+    public static void main(String[] args) {
+    	
+    	new BoardMain();
     }
 }

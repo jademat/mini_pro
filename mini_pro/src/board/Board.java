@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -100,7 +101,7 @@ public class Board extends JPanel {
 				jdbc.connect();
 		        model.setRowCount(0);
 		        crud.loadTable(model);
-		        jdbc.close(null, null, null);
+		        jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
 			}
 		});
         
@@ -126,28 +127,28 @@ public class Board extends JPanel {
 						jdbc.connect();
 				        model.setRowCount(0);
 				        crud.loadTable(model);
-				        jdbc.close(null, null, null);
+				        jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
 				        break;
 				    // 번호 오름차순 정렬
 					case 1 :
 						jdbc.connect();
 				        model.setRowCount(0);
 				        crud.loadTable2(model);
-				        jdbc.close(null, null, null);
+				        jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
 				        break;
 					// 인기글순 정렬
 					case 2 :
 						jdbc.connect();
 				        model.setRowCount(0);
 				        crud.loadTable3(model);
-				        jdbc.close(null, null, null);
+				        jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
 				        break;
 					// 등급순 정렬
 					case 3 :
 						jdbc.connect();
 				        model.setRowCount(0);
 				        crud.loadTable4(model);
-				        jdbc.close(null, null, null);
+				        jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
 				        break;
 				} // switch 문 end
 			}
@@ -167,13 +168,12 @@ public class Board extends JPanel {
         jdbc.connect();
         model.setRowCount(0);
         List<Object[]> list = crud.loadTable(model);
-        jdbc.close(null, null, null);        
+        jdbc.close(jdbc.con, jdbc.pstmt, jdbc.res);
 
         // 레코드 선택 이벤트
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-
                 int selectedRow = table.getSelectedRow(); // 선택된 행
                 if (selectedRow != -1) {
                 	

@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Member {
 
-	private int mem_no;
 	private String mem_id;
 	private String mem_pass;
 	private String mem_name;
@@ -19,10 +18,9 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(int mem_no, String mem_id, String mem_pass, String mem_name, int mem_age, String mem_ph,
+	public Member(String mem_id, String mem_pass, String mem_name, int mem_age, String mem_ph,
 			String mem_addr, String mem_job, Date mem_date, int mem_rank) {
 		super();
-		this.mem_no = mem_no;
 		this.mem_id = mem_id;
 		this.mem_pass = mem_pass;
 		this.mem_name = mem_name;
@@ -34,13 +32,6 @@ public class Member {
 		this.mem_rank = mem_rank;
 	}
 
-	public int getMem_no() {
-		return mem_no;
-	}
-
-	public void setMem_no(int mem_no) {
-		this.mem_no = mem_no;
-	}
 
 	public String getMem_id() {
 		return mem_id;
@@ -116,7 +107,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [mem_no=" + mem_no + ", mem_id=" + mem_id + ", mem_pass=" + mem_pass + ", mem_name=" + mem_name
+		return "Member [mem_id=" + ", mem_pass=" + mem_pass + ", mem_name=" + mem_name
 				+ ", mem_age=" + mem_age + ", mem_ph=" + mem_ph + ", mem_addr=" + mem_addr + ", mem_job=" + mem_job
 				+ ", mem_date=" + mem_date + ", mem_rank=" + mem_rank + "]";
 	}

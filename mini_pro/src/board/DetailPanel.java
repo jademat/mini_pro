@@ -113,7 +113,6 @@ public class DetailPanel extends JPanel {
             
             detailPanel.revalidate();
             detailPanel.repaint();
-            jdbc.close(null, null);
             
             detailPanel.setVisible(false); // DetailPanel 숨김
             boardPanel.setVisible(true);  // Board2 표시         
@@ -127,7 +126,6 @@ public class DetailPanel extends JPanel {
             if (result == JOptionPane.YES_OPTION) {
                 int boa_no = Integer.parseInt(board_no.getText());
                 crud.deleteBoard(boa_no);
-                jdbc.close(null, null);
 
             detailPanel.setVisible(false); // DetailPanel 숨김
             boardPanel.setVisible(true);  // Board2 표시

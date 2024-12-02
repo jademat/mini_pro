@@ -1,18 +1,24 @@
 package board;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import dto.Member;
 import header.Header;
 import jdbc.JDBC;
 
-public class Main {
+public class BoardMain {
+	static String mem_id;
+	
+	public BoardMain(JDBC jdbc, String mem_id) {
+		this.mem_id = mem_id;
+	
+	}
 	
     public static void main(String[] args) {
     	JDBC jdbc = new JDBC();
-    	CRUD crud = new CRUD(jdbc);    	
+    	CRUD crud = new CRUD(jdbc);
     	
         JFrame frame = new JFrame();
         frame.setTitle("운동관리시스템");
@@ -21,7 +27,7 @@ public class Main {
         //frame.getContentPane().setLayout(null); // 레이아웃 매니저 비활성화 ==> borderlayout 사용으로 비활성화
 
         // Header 패널
-        Header headerPanel = new Header();
+        Header headerPanel = new Header(jdbc, mem_id);
         headerPanel.setBounds(0, 0, 1200, 100); // 상단 고정 위치   
         headerPanel.setLayout(new BorderLayout(0, 0));
         

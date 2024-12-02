@@ -20,8 +20,10 @@ import login.Welcome;
 
 public class Header extends JPanel {
 	private String mem_id;
+	private JDBC jdbc;
 
 	public Header(JDBC jdbc, String mem_id) {
+		this.jdbc = jdbc;
 		this.mem_id = mem_id;
         
         setBackground(Color.BLACK);

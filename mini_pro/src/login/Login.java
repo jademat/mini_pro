@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import board.BoardMain;
 import header.Header;
 import jdbc.JDBC;
 
@@ -29,7 +30,6 @@ public class Login extends JFrame {
 	private JPasswordField passText;
 	JDBC jdbc = new JDBC();
 	Welcome wel = new Welcome(jdbc,getName());
-
 	/**
 	 * Launch the application.
 	 */
@@ -156,6 +156,7 @@ public class Login extends JFrame {
 				wel.setVisible(true);
 				Profile pro = new Profile(jdbc,mem_id);
 				Header header = new Header(jdbc, mem_id); // JDBC 객체 전달
+				BoardMain bm = new BoardMain(jdbc, mem_id);
 			} else {
 				// 로그인 실패
 				JOptionPane.showMessageDialog(this, "Login Failed", "로그인 실패", JOptionPane.ERROR_MESSAGE);

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import header.Header;
@@ -272,7 +273,6 @@ public class Profile extends JFrame {
 			int res = jdbc.pstmt.executeUpdate();
 			if(res > 0) {
 				JOptionPane.showMessageDialog(null, "삭제 완료");
-				dispose();
 				Login l = new Login();
 				l.setVisible(true);
 			}else {

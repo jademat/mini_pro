@@ -30,6 +30,7 @@ public class Login extends JFrame {
 	private JPasswordField passText;
 	JDBC jdbc = new JDBC();
 	Welcome wel = new Welcome(jdbc,getName());
+	BoardMain boardmain = new BoardMain(jdbc,getName());
 	/**
 	 * Launch the application.
 	 */

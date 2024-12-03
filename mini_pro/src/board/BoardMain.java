@@ -12,9 +12,9 @@ public class BoardMain extends JFrame {
 	static String mem_id;
 	JDBC jdbc = new JDBC();
 	CRUD crud = new CRUD(jdbc);
-	
-	public BoardMain() {
-		        
+ 
+   public BoardMain() {
+              
         setTitle("운동관리시스템");
         setSize(1200, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +54,7 @@ public class BoardMain extends JFrame {
         insertPanel.setInsertPanel(boardPanel, insertPanel);       
 
         setVisible(true);
+<<<<<<< HEAD
 	}
 	
 	public BoardMain(JDBC jdbc, String mem_id) {
@@ -64,5 +65,17 @@ public class BoardMain extends JFrame {
     public static void main(String[] args) {
     	
     	new BoardMain();
+=======
+   }
+   
+   public BoardMain(JDBC jdbc, String mem_id) {
+      this.mem_id = mem_id;
+   
+   }
+   
+    public static void main(String[] args) {
+       
+       new BoardMain();
+>>>>>>> refs/remotes/origin/main
     }
 }

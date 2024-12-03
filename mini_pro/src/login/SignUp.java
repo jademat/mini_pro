@@ -24,8 +24,8 @@ public class SignUp extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel container_Si, siForm;
 	private JLabel back;
-	private JLabel title, idField, passField, nickField, nameField, ageField, phField, addrField, jobField;
-	private JTextField idText, nickText, nameText, ageText, phText, addrText, jobText;
+	private JLabel title, idField, passField, nameField, ageField, phField, addrField, jobField;
+	private JTextField idText, nameText, ageText, phText, addrText, jobText;
 	private JPasswordField passText;
 	private JButton comButton, endButton;
 	JDBC jdbc = new JDBC();
@@ -218,17 +218,43 @@ public class SignUp extends JFrame {
 				JOptionPane.showMessageDialog(null, "유효한 나이를 입력해주세요.");
 				return;
 			}
+			jdbc.sql = "SELECT COUNT(*) FROM member WHERE mem_id = ?";
+			jdbc.pstmt = jdbc.con.prepareStatement(jdbc.sql);
+			jdbc.pstmt.setString(1, idText.getText());
+			jdbc.res = jdbc.pstmt.executeQuery();
 
-	        jdbc.sql = "insert into member values(mem_no_seq.nextval,?,?,?,?,?,?,?,sysdate,default)";
+			if (jdbc.res.next()) {
+				int count = jdbc.res.getInt(1);
+				if (count > 0) {
+					JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.");
+					return; // 아이디 중복 시 종료
+				}
+		
+			}
+			
+			jdbc.sql = "SELECT COUNT(*) FROM member WHERE mem_ph = ?";
 	        jdbc.pstmt = jdbc.con.prepareStatement(jdbc.sql);
+	        jdbc.pstmt.setString(1, phText.getText());
+	        jdbc.res = jdbc.pstmt.executeQuery();
 
-	        jdbc.pstmt.setString(1, idText.getText());
-	        jdbc.pstmt.setString(2, new String(passText.getPassword())); // 비밀번호
-	        jdbc.pstmt.setString(3, nameText.getText());
-	        jdbc.pstmt.setString(4, ageText.getText()); 
-	        jdbc.pstmt.setString(5, phText.getText());
-	        jdbc.pstmt.setString(6, addrText.getText());
-	        jdbc.pstmt.setString(7, jobText.getText());
+	        if (jdbc.res.next()) {
+	            int count = jdbc.res.getInt(1);
+	            if (count > 0) {
+	                JOptionPane.showMessageDialog(null, "이미 존재하는 연락처입니다.");
+	                return; // 연락처 중복 시 종료
+	            }
+	        }
+
+			jdbc.sql = "insert into member values(?,?,?,?,?,?,?,sysdate,default)";
+			jdbc.pstmt = jdbc.con.prepareStatement(jdbc.sql);
+
+			jdbc.pstmt.setString(1, idText.getText());
+			jdbc.pstmt.setString(2, new String(passText.getPassword())); // 비밀번호
+			jdbc.pstmt.setString(3, nameText.getText());
+			jdbc.pstmt.setString(4, ageText.getText());
+			jdbc.pstmt.setString(5, phText.getText());
+			jdbc.pstmt.setString(6, addrText.getText());
+			jdbc.pstmt.setString(7, jobText.getText());
 
 			int res = jdbc.pstmt.executeUpdate();
 			if (res > 0) {
